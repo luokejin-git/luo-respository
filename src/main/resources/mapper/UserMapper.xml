@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.usermanagement.mapper.UserMapper">
+
+    <!-- 查询全部用户 -->
+    <select id="selectAll"
+            resultType="com.example.usermanagement.entity.User">
+        SELECT id, name, age, email, status
+        FROM users
+        ORDER BY id ASC
+    </select>
+
+    <!-- 根据 ID 查询 -->
+    <select id="selectById"
+            resultType="com.example.usermanagement.entity.User">
+        SELECT id, name, age, email, status
+        FROM users
+        WHERE id = #{id}
+    </select>
+
+    <!-- 新增用户 -->
+    <insert id="insert"
+            parameterType="com.example.usermanagement.entity.User"
+            useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO users (
+        name,
+        age,
+        email,
+        status
+        )
+        VALUES (
+        #{name},
+        #{age},
+        #{email},
+        #{status}
+        )
+    </insert>
+
+    <!-- 修改用户 -->
+    <update id="update"
+            parameterType="com.example.usermanagement.entity.User">
+        UPDATE users
+        SET
+        name = #{name},
+        age = #{age},
+        email = #{email}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除用户 -->
+    <delete id="deleteById">
+        DELETE FROM users
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
